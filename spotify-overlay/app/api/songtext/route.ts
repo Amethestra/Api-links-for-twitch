@@ -1,5 +1,4 @@
 // src/app/api/songtext/route.ts
-import { NextRequest } from "next/server";
 import SpotifyWebApi from "spotify-web-api-node";
 
 const spotifyApi = new SpotifyWebApi({
