@@ -13,7 +13,7 @@ function isTrackObjectFull(item: unknown): item is SpotifyApi.TrackObjectFull {
   return typeof item === "object" && item !== null && "artists" in item;
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const data = await spotifyApi.refreshAccessToken();
     spotifyApi.setAccessToken(data.body["access_token"]);
