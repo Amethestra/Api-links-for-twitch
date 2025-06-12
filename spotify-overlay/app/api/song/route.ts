@@ -5,9 +5,8 @@ import SpotifyWebApi from "spotify-web-api-node";
 const spotifyApi = new SpotifyWebApi({
   clientId: process.env.SPOTIFY_CLIENT_ID!,
   clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
+  refreshToken: process.env.SPOTIFY_REFRESH_TOKEN!,
 });
-
-spotifyApi.setRefreshToken(process.env.SPOTIFY_REFRESH_TOKEN!);
 
 // Type guard to check if the item is a TrackObjectFull
 function isTrackObjectFull(item: unknown): item is SpotifyApi.TrackObjectFull {
@@ -16,11 +15,11 @@ function isTrackObjectFull(item: unknown): item is SpotifyApi.TrackObjectFull {
 
 export async function GET() {
   try {
-    // Refresh token to get a fresh access token
+    // Refresh the access token
     const data = await spotifyApi.refreshAccessToken();
-    spotifyApi.setAccessToken(data.body["access_token"]);
+    spotifyApi.setAccessToken(data.body.access_token);
 
-    // Get the current playing track/episode
+    // Get current playing track or episode
     const trackData = await spotifyApi.getMyCurrentPlayingTrack();
 
     if (trackData.body?.is_playing && trackData.body?.item) {
@@ -34,11 +33,11 @@ export async function GET() {
           albumArt: item.album.images[0]?.url ?? "",
         });
       } else {
-        // Not a track (maybe a podcast episode), respond with no playing info
+        // Could be a podcast or other content, return not playing
         return NextResponse.json({ isPlaying: false });
       }
     } else {
-      // Nothing playing
+      // Nothing is playing
       return NextResponse.json({ isPlaying: false });
     }
   } catch (err) {
