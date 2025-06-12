@@ -43,7 +43,7 @@ export async function GET() {
   } catch (err) {
     console.error("Error fetching song data:", err);
     return NextResponse.json(
-      { error: "Failed to load song data" },
+      { error: err instanceof Error ? err.message : "Unkown error" },
       { status: 500 }
     );
   }
