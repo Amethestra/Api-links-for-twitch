@@ -36,7 +36,7 @@ export default function Overlay() {
         gap: "1rem",
         padding: "1rem",
         background: "rgba(255,255,255,0.5)",
-        borderRadius: "20px",
+        borderRadius: "10px",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         color: "white",
@@ -51,6 +51,7 @@ export default function Overlay() {
         <div style={{ overflow: "hidden" }}>
             <div style = {{
                 fontWeight: 600,
+                color: "black",
                 fontSize: "1rem",
                 whiteSpace: "nowrap",
                 overflow: "hidden",
