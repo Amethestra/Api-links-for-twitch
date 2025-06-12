@@ -10,8 +10,8 @@ const spotifyApi = new SpotifyWebApi({
 spotifyApi.setRefreshToken(process.env.SPOTIFY_REFRESH_TOKEN!);
 
 // Type guard to check if the item is a TrackObjectFull
-function isTrackObjectFull(item: any): item is SpotifyApi.TrackObjectFull {
-  return item && typeof item === "object" && "artists" in item;
+function isTrackObjectFull(item: unknown): item is SpotifyApi.TrackObjectFull {
+  return typeof item === "object" && item !== null && "artists" in item;
 }
 
 export async function GET() {
@@ -42,6 +42,7 @@ export async function GET() {
       return NextResponse.json({ isPlaying: false });
     }
   } catch (err) {
+    console.error("Error fetching song data:", err);
     return NextResponse.json(
       { error: "Failed to load song data" },
       { status: 500 }

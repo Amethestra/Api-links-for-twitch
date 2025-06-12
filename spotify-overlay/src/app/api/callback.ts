@@ -20,8 +20,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const accessToken = data.body.access_token;
     const refreshToken = data.body.refresh_token;
 
-    // TODO: save tokens somewhere safe for later use (in memory, DB, environment variable, etc.)
-    // For a simple example, you might temporarily store in memory or prompt user to copy tokens.
 
     res.status(200).json({
       message: 'Spotify authorization successful!',
