@@ -1,27 +1,32 @@
-import React, { useEffect, useState } from 'react';
+// src/app/overlay/page.tsx
+"use client";
 
-type SongData = {
+import { useEffect, useState } from "react";
+
+interface SongData {
   isPlaying: boolean;
   name?: string;
   artist?: string;
   albumArt?: string;
-};
+}
 
-const Overlay: React.FC = () => {
+export default function Overlay() {
   const [song, setSong] = useState<SongData>({ isPlaying: false });
 
   useEffect(() => {
-    async function updateSong() {
+    async function fetchSong() {
       try {
-        const res = await fetch('/api/song');
+        const res = await fetch("/api/song");
         const data = await res.json();
         setSong(data);
       } catch (e) {
-        console.error('Error fetching song:', e);
+        console.error("Error fetching song:", e);
+        setSong({ isPlaying: false });
       }
     }
-    updateSong();
-    const interval = setInterval(updateSong, 5000);
+
+    fetchSong();
+    const interval = setInterval(fetchSong, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -79,20 +84,18 @@ const Overlay: React.FC = () => {
         <img
           className="album-cover"
           id="album"
-          src={song.isPlaying ? song.albumArt : '/fallback.png'}
+          src={song.isPlaying ? song.albumArt : "/fallback.png"}
           alt="Album Cover"
         />
         <div className="song-info">
           <div className="song-name" id="track">
-            {song.isPlaying ? song.name : 'Nothing playing'}
+            {song.isPlaying ? song.name : "Nothing playing"}
           </div>
           <div className="artist-name" id="artist">
-            {song.isPlaying ? song.artist : ''}
+            {song.isPlaying ? song.artist : ""}
           </div>
         </div>
       </div>
     </>
   );
-};
-
-export default Overlay;
+}
