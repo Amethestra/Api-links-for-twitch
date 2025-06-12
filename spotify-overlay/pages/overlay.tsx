@@ -1,5 +1,30 @@
-// /pages/overlay.js
-export default function Overlay() {
+import React, { useEffect, useState } from 'react';
+
+type SongData = {
+  isPlaying: boolean;
+  name?: string;
+  artist?: string;
+  albumArt?: string;
+};
+
+const Overlay: React.FC = () => {
+  const [song, setSong] = useState<SongData>({ isPlaying: false });
+
+  useEffect(() => {
+    async function updateSong() {
+      try {
+        const res = await fetch('/api/song');
+        const data = await res.json();
+        setSong(data);
+      } catch (e) {
+        console.error('Error fetching song:', e);
+      }
+    }
+    updateSong();
+    const interval = setInterval(updateSong, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <style jsx global>{`
@@ -51,42 +76,23 @@ export default function Overlay() {
       `}</style>
 
       <div className="song-card" id="song-card">
-        <img className="album-cover" id="album" src="" alt="Album Cover" />
+        <img
+          className="album-cover"
+          id="album"
+          src={song.isPlaying ? song.albumArt : '/fallback.png'}
+          alt="Album Cover"
+        />
         <div className="song-info">
-          <div className="song-name" id="track">Loading...</div>
-          <div className="artist-name" id="artist"></div>
+          <div className="song-name" id="track">
+            {song.isPlaying ? song.name : 'Nothing playing'}
+          </div>
+          <div className="artist-name" id="artist">
+            {song.isPlaying ? song.artist : ''}
+          </div>
         </div>
       </div>
-
-      <script dangerouslySetInnerHTML={{
-        __html: `
-        async function updateSong() {
-          try {
-            const res = await fetch('/api/song');
-            const data = await res.json();
-
-            const track = document.getElementById('track');
-            const artist = document.getElementById('artist');
-            const album = document.getElementById('album');
-
-            if (data.isPlaying) {
-              track.textContent = data.name;
-              artist.textContent = data.artist;
-              album.src = data.albumArt;
-            } else {
-              track.textContent = 'Nothing playing';
-              artist.textContent = '';
-              album.src = '/fallback.png';
-            }
-          } catch (e) {
-            console.error('Error fetching song:', e);
-          }
-        }
-
-        updateSong();
-        setInterval(updateSong, 5000);
-        `
-      }} />
     </>
   );
-}
+};
+
+export default Overlay;
