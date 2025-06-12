@@ -1,4 +1,3 @@
-// src/app/overlay/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -31,71 +30,38 @@ export default function Overlay() {
   }, []);
 
   return (
-    <>
-      <style jsx global>{`
-        body {
-          margin: 0;
-          background: transparent;
-          font-family: 'Segoe UI', sans-serif;
-        }
-      `}</style>
-      <style jsx>{`
-        .song-card {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          padding: 1rem;
-          border-radius: 20px;
-          background: rgba(255, 255, 255, 0.08);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          color: white;
-          width: 320px;
-          box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .album-cover {
-          width: 64px;
-          height: 64px;
-          border-radius: 12px;
-          object-fit: cover;
-        }
-
-        .song-info {
-          overflow: hidden;
-        }
-
-        .song-name {
-          font-weight: 600;
-          font-size: 1rem;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        .artist-name {
-          font-size: 0.875rem;
-          opacity: 0.8;
-        }
-      `}</style>
-
-      <div className="song-card" id="song-card">
+    <div style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "1rem",
+        padding: "1rem",
+        background: "rgba(255,255,255,0.5)",
+        borderRadius: "20px",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        color: "white",
+        width: "320px",
+        boxShadow: "0 0 30px rgba(0, 0, 0, 0.4)",
+    }}>
         <img
-          className="album-cover"
-          id="album"
-          src={song.isPlaying ? song.albumArt : "/fallback.png"}
-          alt="Album Cover"
+            style={{ width: "64px", height: "64px", borderRadius: "12px", objectFit: "cover" }}
+            src={song.isPlaying ? song.albumArt : "/fallback.png"}
+            alt="Album Art"
         />
-        <div className="song-info">
-          <div className="song-name" id="track">
-            {song.isPlaying ? song.name : "Nothing playing"}
-          </div>
-          <div className="artist-name" id="artist">
-            {song.isPlaying ? song.artist : ""}
-          </div>
+        <div style={{ overflow: "hidden" }}>
+            <div style = {{
+                fontWeight: 600,
+                fontSize: "1rem",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis"
+            }}>
+                {song.isPlaying ? song.name : "Nothing Playing"}
+            </div>
+            <div style = {{ fontSize: "0.875rem", opacity: 0.8}}>
+                {song.isPlaying ? song.artist : ""}
+            </div>
         </div>
-      </div>
-    </>
+    </div>
   );
 }
