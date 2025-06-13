@@ -76,11 +76,13 @@ export default function Overlay() {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          color: purple;
         }
 
         .artist-name {
           font-size: 0.875rem;
           opacity: 0.8;
+          color: #333;
         }
       `}</style>
 
