@@ -56,7 +56,7 @@ export default function Overlay() {
           border: 1px solid rgba(255, 255, 255, 0.2);
           color: black;
           width: 320px;
-          box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 0 30px #a045e2;
         }
 
         .album-cover {
@@ -76,13 +76,13 @@ export default function Overlay() {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          color: purple;
+          color: #df86ea;
         }
 
         .artist-name {
           font-size: 0.875rem;
           opacity: 0.8;
-          color: #333;
+          color: #eeecf0;
         }
       `}</style>
 
