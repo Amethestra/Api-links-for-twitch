@@ -76,7 +76,7 @@ export default function Overlay() {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          color: #df86ea;
+          color: white;
         }
 
         .artist-name {
