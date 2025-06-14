@@ -50,13 +50,13 @@ export default function Overlay() {
           gap: 1rem;
           padding: 1rem;
           border-radius: 20px;
-          background: rgba(0, 0, 0, 0.35);
+          background: rgba(0, 0, 0, 0.5);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           border: 1px solid rgba(255, 255, 255, 0.2);
           color: black;
           width: 320px;
-          box-shadow: 0 0 30px #a045e2;
+          shadow: 0 0 30px #a045e2;
         }
 
         .album-cover {
