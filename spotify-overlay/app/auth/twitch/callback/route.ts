@@ -75,7 +75,7 @@ export async function GET(request: NextRequest) {
 
 
     return response;
-  } catch (err) {
+  } catch {
     return NextResponse.redirect(new URL('/auth/error?error=Server%20error', request.url));
   }
 }

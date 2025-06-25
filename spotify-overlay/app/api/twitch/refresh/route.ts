@@ -30,7 +30,7 @@ export async function GET() {
 
         return response;
 
-    } catch (err) {
+    } catch {
         return new Response("Failed to refresh Twitch access token", {
             status: 500,
         });

@@ -16,7 +16,7 @@ export async function GET() {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
-  } catch (error) {
+  } catch  {
     return new Response('Failed to fetch Twitch user', { status: 500 });
   }
 }
