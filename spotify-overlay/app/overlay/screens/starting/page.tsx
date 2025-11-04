@@ -4,7 +4,7 @@ import AnimatedBackground from "@/overlay/components/AnimatedBackground";
 export default function StartingSoon() {
     return (
         <div>
-            <AnimatedBackground />
+
 
             <div style={{
                 display: "flex",
@@ -20,6 +20,7 @@ export default function StartingSoon() {
                     Starting Soon...
                 </h1>
             </div>
+            <AnimatedBackground />
         </div>
     );
 }
