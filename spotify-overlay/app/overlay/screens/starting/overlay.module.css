@@ -21,30 +21,11 @@
   filter: blur(2px);
 }
 
-/* Pillars */
-.pillar {
-  position: absolute;
-  width: 120px;
-  height: 90%;
-  background: #141020;
-  border: 3px solid #9ca8f0;
-  border-bottom: none;
-  opacity: 0.15;
-  top: 5%;
-}
-
-.pillar.left {
-  left: 8%;
-}
-
-.pillar.right {
-  right: 8%;
-}
 
 /* Throne block */
 .throne {
   position: absolute;
-  width: 280px;
+  width: 840px;
   height: 380px;
   bottom: 18%;
   left: 50%;
