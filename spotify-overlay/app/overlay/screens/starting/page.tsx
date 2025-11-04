@@ -1,36 +1,36 @@
 "use client";
 
-import "./overlay.module.css";
+import styles from "./overlay.module.css";
 
 export default function StartingScreen() {
     return (
-        <div className = "starting-wrapper">
-            <div className="background-layers" />
-            <div className="pillars" >
-                <div className="pillar left" />
-                <div className="pillar right" />
+        <div className={styles.startingWrapper}>
+            <div className={styles.backgroundLayers} />
+
+            <div className={styles.pillars}>
+                <div className={`${styles.pillar} ${styles.left}`} />
+                <div className={`${styles.pillar} ${styles.right}`} />
             </div>
 
-            <div className="throne" />
-            <div className="sigil" />
+            <div className={styles.throne} />
+            <div className={styles.sigil} />
 
-            <div className = "particles">
+            <div className={styles.particles}>
                 {Array.from({ length: 20 }).map((_, i) => (
                     <span
                         key={i}
-                        className="particle"
+                        className={styles.particle}
                         style={{
-                        "--x": Math.random(),
-                        "--d": Math.random() * 10,
+                            "--x": Math.random(),
+                            "--d": Math.random() * 10,
                         } as React.CSSProperties}
                     />
-                    ))}
-
+                ))}
             </div>
 
-            <div className="fog" />
+            <div className={styles.fog} />
 
-            <div className="text">
+            <div className={styles.text}>
                 <h1>Starting Soon...</h1>
             </div>
         </div>
