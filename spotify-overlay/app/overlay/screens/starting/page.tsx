@@ -1,6 +1,6 @@
 "use client";
 
-import "../../styles/overlay.module.css";
+import "./overlay.module.css";
 
 export default function StartingScreen() {
     return (
