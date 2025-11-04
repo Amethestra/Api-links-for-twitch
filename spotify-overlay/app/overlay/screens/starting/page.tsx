@@ -7,13 +7,8 @@ export default function StartingScreen() {
         <div className={styles.startingWrapper}>
             <div className={styles.backgroundLayers} />
 
-            <div className={styles.pillars}>
-                <div className={`${styles.pillar} ${styles.left}`} />
-                <div className={`${styles.pillar} ${styles.right}`} />
-            </div>
 
             <div className={styles.throne} />
-            <div className={styles.sigil} />
 
             <div className={styles.particles}>
                 {Array.from({ length: 20 }).map((_, i) => (
