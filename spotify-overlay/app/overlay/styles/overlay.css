@@ -200,8 +200,8 @@
 
 .chat-bar {
   position: absolute;
-  width: 800px;
-  height: 600px;
+  width: 600px;
+  height: 400px;
   bottom: 40px; /* adjust vertical placement as needed */
   left: 50%;
   transform: translateX(-50%);
