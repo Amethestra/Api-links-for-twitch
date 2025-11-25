@@ -6,8 +6,6 @@ type SceneVariant = "starting" | "brb" | "ending";
 
 interface SongData {
   isPlaying?: boolean;
-  title?: string;
-  artist?: string;
 }
 
 interface ThroneSceneProps {
@@ -31,11 +29,8 @@ const variantCopy: Record<SceneVariant, { title: string; subtitle: string }> = {
 
 export default function ThroneScene({ variant }: ThroneSceneProps) {
   const [song, setSong] = useState<SongData | null>(null);
-  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true);
-
     async function fetchSong() {
       try {
         const res = await fetch("/api/song");
@@ -43,12 +38,12 @@ export default function ThroneScene({ variant }: ThroneSceneProps) {
         const data = await res.json();
         setSong(data);
       } catch {
-        // fail silently for overlays
+        // silent fail
       }
     }
 
     fetchSong();
-    const interval = setInterval(fetchSong, 5000); // poll every 5s
+    const interval = setInterval(fetchSong, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -72,21 +67,27 @@ export default function ThroneScene({ variant }: ThroneSceneProps) {
           </div>
         </div>
 
-        {/* Fog strips */}
+        {/* Fog */}
         <div className="layer layer-fog">
           <div className="fog fog-low" />
           <div className="fog fog-mid" />
           <div className="fog fog-high" />
         </div>
 
+        {/* Text */}
+        <div className="layer layer-text">
+          <div className="text-block">
+            <h1 className="overlay-title">{copy.subtitle}</h1>
+            <p className="overlay-subtitle">{copy.title}</p>
+          </div>
+        </div>
 
-
-        {/* Bottom chat box (600 x 400) */}
+        {/* Chat box (800 x 600 if you changed it) */}
         <div className="layer layer-chatbar">
           <div className="chat-bar" />
         </div>
 
-        {/* Variant-specific accent bar */}
+        {/* Accent bar */}
         <div className="layer layer-accent">
           <div className={`accent-bar accent-bar--${variant}`} />
         </div>
