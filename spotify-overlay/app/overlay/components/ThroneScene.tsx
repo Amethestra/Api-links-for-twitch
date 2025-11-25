@@ -79,25 +79,7 @@ export default function ThroneScene({ variant }: ThroneSceneProps) {
           <div className="fog fog-high" />
         </div>
 
-        {/* Text elements */}
-        <div className="layer layer-text">
-          <div className="text-block">
-            <h1 className="overlay-title">{copy.subtitle}</h1>
-            <p className="overlay-subtitle">{copy.title}</p>
-          </div>
 
-          {isClient && song && (
-            <div className="now-playing">
-              <span className="now-playing-label">Now Playing</span>
-              <span className="now-playing-track">
-                {song.title || "Unknown Track"}
-              </span>
-              {song.artist && (
-                <span className="now-playing-artist">{song.artist}</span>
-              )}
-            </div>
-          )}
-        </div>
 
         {/* Bottom chat box (600 x 400) */}
         <div className="layer layer-chatbar">
