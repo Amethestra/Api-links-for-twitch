@@ -1,3 +1,5 @@
+import "@/overlay/styles/overlay.css"
+
 import React from 'react';
 
 export default function OverlayLayout({

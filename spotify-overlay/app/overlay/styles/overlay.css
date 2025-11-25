@@ -1,0 +1,562 @@
+/* Root & 1080p canvas */
+.overlay-root {
+  width: 100vw;
+  height: 100vh;
+  background: #02000a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.overlay-1080p {
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at top, #1b0738 0, #050008 55%, #010005 100%);
+  isolation: isolate;
+}
+
+/* Generic layer handling */
+.layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Background slab */
+.layer-bg::before {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  border-radius: 32px;
+  background:
+    linear-gradient(145deg, rgba(120, 43, 219, 0.18), rgba(188, 152, 255, 0.04)),
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.07), transparent 60%);
+  box-shadow:
+    0 0 120px rgba(120, 43, 219, 0.4),
+    inset 0 0 40px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(220, 225, 255, 0.12);
+  animation: bg-slow-pulse 18s ease-in-out infinite alternate;
+}
+
+/* Deep geometry */
+.geo-arch {
+  position: absolute;
+  bottom: 8%;
+  width: 26%;
+  height: 72%;
+  border-radius: 50% 50% 0 0;
+  border: 2px solid rgba(222, 230, 255, 0.08);
+  border-bottom: none;
+  filter: blur(0.6px);
+}
+
+.geo-arch-left {
+  left: 9%;
+}
+
+.geo-arch-right {
+  right: 9%;
+}
+
+.geo-grid {
+  position: absolute;
+  inset: 16% 18% 40%;
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px
+    );
+  background-size: 0.75rem 0.75rem;
+  opacity: 0.3;
+  mix-blend-mode: screen;
+  animation: grid-drift 40s linear infinite;
+}
+
+/* Pillars */
+.layer-pillars {
+  filter: drop-shadow(0 0 30px rgba(120, 43, 219, 0.6));
+}
+
+.pillar {
+  position: absolute;
+  bottom: 8%;
+  width: 5%;
+  height: 70%;
+  background: linear-gradient(
+    180deg,
+    rgba(230, 235, 255, 0.85),
+    rgba(140, 145, 170, 0.95) 18%,
+    rgba(40, 42, 70, 1) 80%,
+    rgba(10, 10, 20, 1)
+  );
+  box-shadow:
+    0 0 35px rgba(255, 255, 255, 0.2),
+    inset 0 0 12px rgba(0, 0, 0, 0.8);
+}
+
+.pillar::before {
+  content: "";
+  position: absolute;
+  inset: 0.5rem;
+  border-radius: 10px;
+  border: 2px solid rgba(240, 242, 255, 0.75);
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.7);
+}
+
+.pillar::after {
+  content: "";
+  position: absolute;
+  top: -1.7rem;
+  left: -0.4rem;
+  right: -0.4rem;
+  height: 1.7rem;
+  border-radius: 14px 14px 0 0;
+  background: linear-gradient(
+    180deg,
+    rgba(245, 247, 255, 0.95),
+    rgba(151, 153, 180, 1)
+  );
+  box-shadow:
+    0 0 18px rgba(255, 255, 255, 0.5),
+    0 6px 8px rgba(0, 0, 0, 0.65);
+}
+
+.pillar-left {
+  left: 5%;
+}
+
+.pillar-left-inner {
+  left: 16%;
+  transform: scale(0.9);
+  opacity: 0.85;
+}
+
+.pillar-right-inner {
+  right: 16%;
+  transform: scale(0.9);
+  opacity: 0.85;
+}
+
+.pillar-right {
+  right: 5%;
+}
+
+/* Throne silhouette */
+.layer-throne {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.throne-base {
+  position: absolute;
+  bottom: 8%;
+  width: 26%;
+  height: 5%;
+  border-radius: 16px 16px 0 0;
+  background: linear-gradient(
+    180deg,
+    rgba(210, 214, 240, 1),
+    rgba(110, 114, 150, 1)
+  );
+  box-shadow:
+    0 0 30px rgba(200, 205, 255, 0.6),
+    0 -12px 20px rgba(0, 0, 0, 0.7);
+}
+
+.throne-seat {
+  position: absolute;
+  bottom: 13%;
+  width: 18%;
+  height: 8%;
+  border-radius: 18px;
+  background: linear-gradient(
+    135deg,
+    rgba(24, 9, 44, 0.9),
+    rgba(69, 26, 133, 0.9)
+  );
+  border: 2px solid rgba(214, 218, 255, 0.95);
+  box-shadow:
+    0 0 26px rgba(120, 43, 219, 0.8),
+    0 8px 20px rgba(0, 0, 0, 0.9);
+}
+
+.throne-back {
+  position: absolute;
+  bottom: 21%;
+  width: 15%;
+  height: 30%;
+  border-radius: 24px 24px 40px 40px;
+  background: linear-gradient(
+    180deg,
+    rgba(21, 6, 44, 1),
+    rgba(6, 0, 14, 1)
+  );
+  border: 2px solid rgba(214, 218, 255, 0.9);
+  box-shadow:
+    0 0 40px rgba(133, 88, 255, 0.9),
+    0 0 65px rgba(120, 43, 219, 0.8);
+}
+
+.throne-gem {
+  position: absolute;
+  bottom: 32%;
+  width: 5%;
+  height: 9%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f5f5ff 0, #c7b7ff 40%, #441084 80%);
+  box-shadow:
+    0 0 40px rgba(228, 214, 255, 0.9),
+    0 0 80px rgba(150, 100, 255, 1);
+  animation: gem-pulse 4.5s ease-in-out infinite;
+}
+
+/* Sigil rings & music pulse */
+.layer-sigil {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sigil-ring {
+  position: relative;
+  width: 18%;
+  padding-bottom: 18%;
+  border-radius: 50%;
+  border: 2px solid rgba(224, 228, 255, 0.8);
+  box-shadow:
+    0 0 55px rgba(145, 110, 255, 0.9),
+    inset 0 0 35px rgba(111, 71, 210, 0.9);
+  mix-blend-mode: screen;
+}
+
+.sigil-inner-ring {
+  position: absolute;
+  inset: 16%;
+  border-radius: 50%;
+  border: 1px dashed rgba(230, 234, 255, 0.85);
+}
+
+.sigil-runes {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow:
+    0 -34px 0 rgba(248, 244, 255, 0.8),
+    24px 24px 0 rgba(195, 176, 255, 0.8),
+    -20px 22px 0 rgba(185, 164, 245, 0.8),
+    32px -14px 0 rgba(255, 250, 255, 0.9),
+    -28px -18px 0 rgba(172, 148, 240, 0.8);
+  opacity: 0.75;
+}
+
+.sigil-runes-outer {
+  animation: runes-spin-outer 30s linear infinite;
+}
+
+.sigil-runes-inner {
+  inset: 18%;
+  opacity: 0.6;
+  animation: runes-spin-inner 18s linear infinite reverse;
+}
+
+/* Idle: soft breathing */
+.sigil-ring--idle {
+  animation: sigil-breathe 10s ease-in-out infinite;
+}
+
+/* Active: music pulsing stronger */
+.sigil-ring--active {
+  animation:
+    sigil-breathe 8s ease-in-out infinite,
+    sigil-pulse-active 1.2s ease-in-out infinite;
+}
+
+/* Particles */
+.particle-field {
+  position: absolute;
+  inset: 12% 8%;
+  background-image: radial-gradient(circle, rgba(248, 244, 255, 0.9) 1px, transparent 0);
+  background-size: 48px 48px;
+  opacity: 0.7;
+}
+
+.particle-field-back {
+  filter: blur(1.8px);
+  animation: particles-float-back 34s linear infinite;
+}
+
+.particle-field-front {
+  filter: blur(0.8px);
+  opacity: 0.9;
+  animation: particles-float-front 22s linear infinite reverse;
+}
+
+/* Fog */
+.layer-fog {
+  mix-blend-mode: screen;
+}
+
+.fog {
+  position: absolute;
+  left: -40%;
+  right: -40%;
+  height: 22%;
+  background: radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.22), transparent 65%),
+    radial-gradient(circle at 70% 70%, rgba(189, 177, 255, 0.22), transparent 70%);
+  filter: blur(18px);
+}
+
+.fog-low {
+  bottom: 7%;
+  opacity: 0.65;
+  animation: fog-drift-low 36s linear infinite;
+}
+
+.fog-mid {
+  bottom: 18%;
+  opacity: 0.45;
+  animation: fog-drift-mid 52s linear infinite reverse;
+}
+
+.fog-high {
+  bottom: 32%;
+  opacity: 0.35;
+  animation: fog-drift-high 68s linear infinite;
+}
+
+/* Text */
+.layer-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3.5rem 4.5rem;
+  pointer-events: none;
+}
+
+.text-block {
+  align-self: center;
+  margin-top: 5rem;
+  text-align: center;
+}
+
+.overlay-title {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 4rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  color: #f7f3ff;
+  text-shadow:
+    0 0 22px rgba(255, 255, 255, 0.9),
+    0 0 46px rgba(120, 43, 219, 0.9);
+}
+
+.overlay-subtitle {
+  font-size: 1.4rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(223, 216, 255, 0.88);
+}
+
+/* Now playing block */
+.now-playing {
+  align-self: flex-end;
+  margin-bottom: 2.5rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(9, 3, 26, 0.94), rgba(36, 12, 71, 0.96));
+  border: 1px solid rgba(221, 231, 255, 0.42);
+  box-shadow:
+    0 0 22px rgba(118, 77, 214, 0.7),
+    0 0 60px rgba(65, 31, 131, 0.9);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.now-playing-label {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(201, 208, 255, 0.9);
+}
+
+.now-playing-track {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f8f5ff;
+}
+
+.now-playing-artist {
+  font-size: 0.78rem;
+  color: rgba(207, 214, 255, 0.85);
+}
+
+/* Accent bar per scene */
+.layer-accent {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.accent-bar {
+  position: absolute;
+  bottom: 5%;
+  width: 34%;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, #f5f4ff, transparent);
+  box-shadow:
+    0 0 16px rgba(255, 255, 255, 0.9),
+    0 0 40px rgba(120, 43, 219, 0.8);
+}
+
+.accent-bar--starting {
+  filter: hue-rotate(0deg);
+}
+
+.accent-bar--brb {
+  filter: hue-rotate(-25deg);
+}
+
+.accent-bar--ending {
+  filter: hue-rotate(40deg);
+}
+
+/* Animations */
+@keyframes bg-slow-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+}
+
+@keyframes grid-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(30px, -40px, 0);
+  }
+}
+
+@keyframes gem-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes runes-spin-outer {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes runes-spin-inner {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes sigil-breathe {
+  0% {
+    transform: scale(1);
+    box-shadow:
+      0 0 40px rgba(145, 110, 255, 0.7),
+      inset 0 0 26px rgba(111, 71, 210, 0.8);
+  }
+  100% {
+    transform: scale(1.04);
+    box-shadow:
+      0 0 60px rgba(183, 155, 255, 1),
+      inset 0 0 34px rgba(143, 108, 234, 1);
+  }
+}
+
+@keyframes sigil-pulse-active {
+  0% {
+    transform: scale(1.04);
+  }
+  45% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes particles-float-back {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(80px, -100px, 0);
+  }
+}
+
+@keyframes particles-float-front {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100px, -80px, 0);
+  }
+}
+
+@keyframes fog-drift-low {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(90px);
+  }
+}
+
+@keyframes fog-drift-mid {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-120px);
+  }
+}
+
+@keyframes fog-drift-high {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(140px);
+  }
+}
