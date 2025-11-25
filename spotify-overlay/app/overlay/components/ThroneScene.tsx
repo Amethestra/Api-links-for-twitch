@@ -58,9 +58,6 @@ export default function ThroneScene({ variant }: ThroneSceneProps) {
   return (
     <div className="overlay-root">
       <div className="overlay-1080p">
-        {/* Background slab */}
-        <div className="layer layer-bg" />
-
         {/* Sigil ring + music pulse */}
         <div className="layer layer-sigil">
           <div
@@ -73,12 +70,6 @@ export default function ThroneScene({ variant }: ThroneSceneProps) {
             <div className="sigil-runes sigil-runes-outer" />
             <div className="sigil-runes sigil-runes-inner" />
           </div>
-        </div>
-
-        {/* Particle field */}
-        <div className="layer layer-particles">
-          <div className="particle-field particle-field-back" />
-          <div className="particle-field particle-field-front" />
         </div>
 
         {/* Fog strips */}
@@ -108,7 +99,7 @@ export default function ThroneScene({ variant }: ThroneSceneProps) {
           )}
         </div>
 
-        {/* Bottom chat bar (for your chat browser source) */}
+        {/* Bottom chat box (600 x 400) */}
         <div className="layer layer-chatbar">
           <div className="chat-bar" />
         </div>
