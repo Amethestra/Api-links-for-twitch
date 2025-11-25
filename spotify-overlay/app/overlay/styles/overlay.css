@@ -41,184 +41,6 @@
   animation: bg-slow-pulse 18s ease-in-out infinite alternate;
 }
 
-/* Deep geometry */
-.geo-arch {
-  position: absolute;
-  bottom: 8%;
-  width: 26%;
-  height: 72%;
-  border-radius: 50% 50% 0 0;
-  border: 2px solid rgba(222, 230, 255, 0.08);
-  border-bottom: none;
-  filter: blur(0.6px);
-}
-
-.geo-arch-left {
-  left: 9%;
-}
-
-.geo-arch-right {
-  right: 9%;
-}
-
-.geo-grid {
-  position: absolute;
-  inset: 16% 18% 40%;
-  background-image:
-    linear-gradient(
-      rgba(255, 255, 255, 0.04) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.04) 1px,
-      transparent 1px
-    );
-  background-size: 0.75rem 0.75rem;
-  opacity: 0.3;
-  mix-blend-mode: screen;
-  animation: grid-drift 40s linear infinite;
-}
-
-/* Pillars */
-.layer-pillars {
-  filter: drop-shadow(0 0 30px rgba(120, 43, 219, 0.6));
-}
-
-.pillar {
-  position: absolute;
-  bottom: 8%;
-  width: 5%;
-  height: 70%;
-  background: linear-gradient(
-    180deg,
-    rgba(230, 235, 255, 0.85),
-    rgba(140, 145, 170, 0.95) 18%,
-    rgba(40, 42, 70, 1) 80%,
-    rgba(10, 10, 20, 1)
-  );
-  box-shadow:
-    0 0 35px rgba(255, 255, 255, 0.2),
-    inset 0 0 12px rgba(0, 0, 0, 0.8);
-}
-
-.pillar::before {
-  content: "";
-  position: absolute;
-  inset: 0.5rem;
-  border-radius: 10px;
-  border: 2px solid rgba(240, 242, 255, 0.75);
-  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.7);
-}
-
-.pillar::after {
-  content: "";
-  position: absolute;
-  top: -1.7rem;
-  left: -0.4rem;
-  right: -0.4rem;
-  height: 1.7rem;
-  border-radius: 14px 14px 0 0;
-  background: linear-gradient(
-    180deg,
-    rgba(245, 247, 255, 0.95),
-    rgba(151, 153, 180, 1)
-  );
-  box-shadow:
-    0 0 18px rgba(255, 255, 255, 0.5),
-    0 6px 8px rgba(0, 0, 0, 0.65);
-}
-
-.pillar-left {
-  left: 5%;
-}
-
-.pillar-left-inner {
-  left: 16%;
-  transform: scale(0.9);
-  opacity: 0.85;
-}
-
-.pillar-right-inner {
-  right: 16%;
-  transform: scale(0.9);
-  opacity: 0.85;
-}
-
-.pillar-right {
-  right: 5%;
-}
-
-/* Throne silhouette */
-.layer-throne {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.throne-base {
-  position: absolute;
-  bottom: 8%;
-  width: 26%;
-  height: 5%;
-  border-radius: 16px 16px 0 0;
-  background: linear-gradient(
-    180deg,
-    rgba(210, 214, 240, 1),
-    rgba(110, 114, 150, 1)
-  );
-  box-shadow:
-    0 0 30px rgba(200, 205, 255, 0.6),
-    0 -12px 20px rgba(0, 0, 0, 0.7);
-}
-
-.throne-seat {
-  position: absolute;
-  bottom: 13%;
-  width: 18%;
-  height: 8%;
-  border-radius: 18px;
-  background: linear-gradient(
-    135deg,
-    rgba(24, 9, 44, 0.9),
-    rgba(69, 26, 133, 0.9)
-  );
-  border: 2px solid rgba(214, 218, 255, 0.95);
-  box-shadow:
-    0 0 26px rgba(120, 43, 219, 0.8),
-    0 8px 20px rgba(0, 0, 0, 0.9);
-}
-
-.throne-back {
-  position: absolute;
-  bottom: 21%;
-  width: 15%;
-  height: 30%;
-  border-radius: 24px 24px 40px 40px;
-  background: linear-gradient(
-    180deg,
-    rgba(21, 6, 44, 1),
-    rgba(6, 0, 14, 1)
-  );
-  border: 2px solid rgba(214, 218, 255, 0.9);
-  box-shadow:
-    0 0 40px rgba(133, 88, 255, 0.9),
-    0 0 65px rgba(120, 43, 219, 0.8);
-}
-
-.throne-gem {
-  position: absolute;
-  bottom: 32%;
-  width: 5%;
-  height: 9%;
-  border-radius: 50%;
-  background: radial-gradient(circle, #f5f5ff 0, #c7b7ff 40%, #441084 80%);
-  box-shadow:
-    0 0 40px rgba(228, 214, 255, 0.9),
-    0 0 80px rgba(150, 100, 255, 1);
-  animation: gem-pulse 4.5s ease-in-out infinite;
-}
-
 /* Sigil rings & music pulse */
 .layer-sigil {
   display: flex;
@@ -281,6 +103,10 @@
 }
 
 /* Particles */
+.layer-particles {
+  opacity: 0.85;
+}
+
 .particle-field {
   position: absolute;
   inset: 12% 8%;
@@ -310,25 +136,26 @@
   left: -40%;
   right: -40%;
   height: 22%;
-  background: radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.22), transparent 65%),
+  background:
+    radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.22), transparent 65%),
     radial-gradient(circle at 70% 70%, rgba(189, 177, 255, 0.22), transparent 70%);
   filter: blur(18px);
 }
 
 .fog-low {
-  bottom: 7%;
+  bottom: 9%;
   opacity: 0.65;
   animation: fog-drift-low 36s linear infinite;
 }
 
 .fog-mid {
-  bottom: 18%;
+  bottom: 22%;
   opacity: 0.45;
   animation: fog-drift-mid 52s linear infinite reverse;
 }
 
 .fog-high {
-  bottom: 32%;
+  bottom: 34%;
   opacity: 0.35;
   animation: fog-drift-high 68s linear infinite;
 }
@@ -404,6 +231,29 @@
   color: rgba(207, 214, 255, 0.85);
 }
 
+/* Bottom chat bar */
+.layer-chatbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.chat-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 210px; /* tweak for your chat source height */
+  background:
+    linear-gradient(180deg, rgba(3, 0, 12, 0.8), rgba(3, 0, 12, 0.96)),
+    radial-gradient(circle at top, rgba(145, 110, 255, 0.45), transparent 65%);
+  border-top: 1px solid rgba(233, 236, 255, 0.14);
+  box-shadow:
+    0 -10px 40px rgba(0, 0, 0, 0.9),
+    0 -2px 26px rgba(120, 43, 219, 0.7);
+  backdrop-filter: blur(12px);
+}
+
 /* Accent bar per scene */
 .layer-accent {
   display: flex;
@@ -443,30 +293,6 @@
   }
   100% {
     transform: scale(1.02);
-    opacity: 1;
-  }
-}
-
-@keyframes grid-drift {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(30px, -40px, 0);
-  }
-}
-
-@keyframes gem-pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.08);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
     opacity: 1;
   }
 }

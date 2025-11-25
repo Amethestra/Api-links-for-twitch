@@ -61,29 +61,6 @@ export default function ThroneScene({ variant }: ThroneSceneProps) {
         {/* Background slab */}
         <div className="layer layer-bg" />
 
-        {/* Deep background geometry */}
-        <div className="layer layer-geometry">
-          <div className="geo-arch geo-arch-left" />
-          <div className="geo-arch geo-arch-right" />
-          <div className="geo-grid" />
-        </div>
-
-        {/* Gothic pillars */}
-        <div className="layer layer-pillars">
-          <div className="pillar pillar-left" />
-          <div className="pillar pillar-left-inner" />
-          <div className="pillar pillar-right-inner" />
-          <div className="pillar pillar-right" />
-        </div>
-
-        {/* Throne silhouette */}
-        <div className="layer layer-throne">
-          <div className="throne-base" />
-          <div className="throne-seat" />
-          <div className="throne-back" />
-          <div className="throne-gem" />
-        </div>
-
         {/* Sigil ring + music pulse */}
         <div className="layer layer-sigil">
           <div
@@ -131,7 +108,12 @@ export default function ThroneScene({ variant }: ThroneSceneProps) {
           )}
         </div>
 
-        {/* Optional variant-specific accent bar */}
+        {/* Bottom chat bar (for your chat browser source) */}
+        <div className="layer layer-chatbar">
+          <div className="chat-bar" />
+        </div>
+
+        {/* Variant-specific accent bar */}
         <div className="layer layer-accent">
           <div className={`accent-bar accent-bar--${variant}`} />
         </div>
