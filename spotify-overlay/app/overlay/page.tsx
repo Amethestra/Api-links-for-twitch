@@ -18,7 +18,7 @@ export default function Overlay() {
 
     async function fetchSong() {
       try {
-        const res = await fetch("/api/song");
+        const res = await fetch("/api/song?user=SPOTIFY_USER_ID");
         const data = await res.json();
         setSong(data);
       } catch (e) {

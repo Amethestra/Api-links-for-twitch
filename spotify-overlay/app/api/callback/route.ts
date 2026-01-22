@@ -1,33 +1,45 @@
-// src/app/api/callback/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import SpotifyWebApi from "spotify-web-api-node";
+import { supabase } from "@/lib/supabaseServer";
 
 const spotifyApi = new SpotifyWebApi({
-  clientId: process.env.SPOTIFY_CLIENT_ID,
-  clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-  redirectUri: process.env.SPOTIFY_REDIRECT_URI,
+  clientId: process.env.SPOTIFY_CLIENT_ID!,
+  clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
+  redirectUri: process.env.SPOTIFY_REDIRECT_URI!,
 });
 
 export async function GET(req: NextRequest) {
-  const url = new URL(req.url);
-  const code = url.searchParams.get("code");
-
+  const code = new URL(req.url).searchParams.get("code");
   if (!code) {
-    return NextResponse.json({ error: "Missing code parameter" }, { status: 400 });
+    return NextResponse.json({ error: "Missing code"}, { status: 400 });
   }
 
   try {
-    const data = await spotifyApi.authorizationCodeGrant(code);
-    const accessToken = data.body.access_token;
-    const refreshToken = data.body.refresh_token;
+    const auth = await spotifyApi.authorizationCodeGrant(code);
+    spotifyApi.setAccessToken(auth.body.access_token);
+    spotifyApi.setRefreshToken(auth.body.refresh_token);
 
-    return NextResponse.json({
-      message: "Spotify authorization successful!",
-      accessToken,
-      refreshToken,
-    });
+    const me = await spotifyApi.getMe();
+
+    const expiresAt = new Date(
+      Date.now() + auth.body.expires_in * 1000
+    ).toISOString();
+
+    await supabase
+      .from("spotify_tokens")
+      .upsert({
+        spotify_user_id: me.body.id,
+        access_token: auth.body.access_token,
+        refresh_token: auth.body.refresh_token,
+        expires_at: expiresAt,
+        updated_at: new Date().toISOString,
+      });
+    
+      return NextResponse.redirect(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/success`
+      );
   } catch (err) {
-    console.error("Authorization failed:", err);
-    return NextResponse.json({ error: "Authorization failed" }, { status: 500 });
+    console.error(err);
+    return NextResponse.json({ error: "Auth Failed"}, { status: 500 });
   }
 }
