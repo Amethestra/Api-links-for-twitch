@@ -15,7 +15,7 @@ export async function GET() {
   });
 
   const response = NextResponse.redirect(
-    `https://accounts.spotify.com/authorise?${params.toString()}`
+    `https://accounts.spotify.com/authorize?${params.toString()}`
   );
 
   response.cookies.set('spotify_oauth_state', state, {
