@@ -1,7 +1,4 @@
 import { NextRequest } from "next/server";
-import SpotifyWebApi from "spotify-web-api-node";
-import { supabase } from "@/lib/supabaseServer";
-import { access } from "fs";
 import { getSpotifyApiForUser } from "@/lib/spotifyForUser";
 
 function isTrackObjectFull(
