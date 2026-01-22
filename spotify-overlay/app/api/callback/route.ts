@@ -17,8 +17,10 @@ export async function GET(req: NextRequest) {
   try {
     const auth = await spotifyApi.authorizationCodeGrant(code);
     spotifyApi.setAccessToken(auth.body.access_token);
-    spotifyApi.setRefreshToken(auth.body.refresh_token);
-
+    if (auth.body.refresh_token) {
+      spotifyApi.setRefreshToken(auth.body.refresh_token);
+    }
+    
     const me = await spotifyApi.getMe();
 
     const expiresAt = new Date(
@@ -30,7 +32,7 @@ export async function GET(req: NextRequest) {
       .upsert({
         spotify_user_id: me.body.id,
         access_token: auth.body.access_token,
-        refresh_token: auth.body.refresh_token,
+        refresh_token: auth.body.refresh_token ?? undefined,
         expires_at: expiresAt,
         updated_at: new Date().toISOString(),
       });
