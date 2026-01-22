@@ -32,11 +32,11 @@ export async function GET(req: NextRequest) {
         access_token: auth.body.access_token,
         refresh_token: auth.body.refresh_token,
         expires_at: expiresAt,
-        updated_at: new Date().toISOString,
+        updated_at: new Date().toISOString(),
       });
     
       return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/success`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/success?user=${me.body.id}`
       );
   } catch (err) {
     console.error(err);
